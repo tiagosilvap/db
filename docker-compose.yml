@@ -10,8 +10,14 @@ services:
       dockerfile: Dockerfile
     environment:
       TZ: America/Sao_Paulo
+      MYSQL_DATABASE: mydb
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_USER: docker
       MYSQL_PASSWORD: admin
     ports:
       - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d
+volumes:
+  db_data:
